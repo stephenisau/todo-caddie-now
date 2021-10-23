@@ -1,0 +1,25 @@
+<main>
+    <h1><u>Title:</u> <%= @todo.title %></h1>
+
+            <p><i>Description:</i> <%= @todo.description %></p>
+            <% if @todo.completed %>
+                <h4><b style="color: green;">Completed</b></h4>
+            <% else %>
+                <h4><b style="color: red;">Incomplete</b></h4>
+            <% end %>
+            <p><b>Due date: </b><%= @todo.due_date %></p>
+            <p><i>created at: </i><%= @todo.created_at %></p>
+
+            <p><i>updated at: </i><%= @todo.updated_at %></p>
+
+            <li><%= link_to 'Edit', edit_todo_path(@todo) %></li>
+              <li><%= link_to "Destroy", todo_path(@todo),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+
+            <li><%= link_to 'Back', todos_path %></li>
+
+        </div>
+
+    </div>  
+    </main>

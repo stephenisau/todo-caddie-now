@@ -1,0 +1,22 @@
+<%= form_with model: todo do |form| %>
+    <div style="display: flex; flex-direction: column; margin: 0 auto; padding: 0 5rem;">
+        <label>Todo title</label>
+        <%= form.text_field :title %>
+        <% todo.errors.full_messages_for(:title).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+        <label>Todo description</label>
+        <%= form.text_area :description, size: "60x10" %>
+        <% todo.errors.full_messages_for(:description).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+        <div style="display: flex; flex-direction: row;">
+        <label>Complete: </label>
+        <%= form.check_box :completed %>
+            <label>Due date: </label>
+            <%= form.date_select :due_date %>   
+            <%= form.time_select :due_date %>   
+        </div>
+        <%= form.submit %>
+    </div>
+<% end %>

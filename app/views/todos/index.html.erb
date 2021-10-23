@@ -1,0 +1,37 @@
+<main class="container">
+<h1>Todos</h1>
+
+<ul>
+<% @todos.each do |todo| %>
+    <li>
+        <%= link_to todo.title, todo %>
+        <% if todo.completed %>
+            <span style="height: 24px; width: 24px;">&#9989;</span>
+        <% else %>
+            <span style="height: 24px; width: 24px;">&#10006;</span>
+        <% end %>
+        <span><%= link_to todo.due_date, todo %></span>
+    </li>
+    <% end %>
+</ul>
+
+<%# <h1>Todos by weekday</h1> %>
+<%# <ul style="display: flex; list-style: none; flex-direction: row; justify-content:space-between;"> %>
+<%# <%= @weekdays.each do |weekday| %> %>
+    <%# <li> %>
+        <%# <%= link_to weekday, "todos/#{weekday.downcase}"%> %>
+    <%# </li> %>
+<%# <% end %> %>
+<%# </ul> %>
+
+
+<%# <h1>Todos by month</h1> %>
+<%# <ul style="display: flex; list-style: none; flex-direction: row; justify-content:space-between;"> %>
+<%# <%= @months.each do |month| %> %>
+    <%# <li> %>
+        <%# <%= link_to month, "todos/#{month.downcase}"%> %>
+    <%# </li> %>
+<%# <% end %> %>
+<%# </ul> %>
+
+<%# <%= link_to "Create New Todo", new_todo_path %> %>
