@@ -1,12 +1,31 @@
 class TodosController < ApplicationController
   def index
     @todos = Todo.all
+    @months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    @weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    @todos_by_month = @todos.group_by { |todo| todo.due_date.strftime("%B") }
+    @todos_by_weekday = @todos.group_by { |todo| todo.due_date.strftime("%A") }
+
   end
 
   def show
     @todo = Todo.find(params[:id])
   end
 
+  def get_by_weekday
+    @month = todo_month_params['month']
+    @month = DateTime.parse(todo_month_params['month'])
+    @todos = Todo.due_by_month(todo_month_params['month'])
+    puts @todos
+    render 'month'
+  end
+
+  def get_by_month
+    @date = todo_date_params['date']
+    @todos = Todo.due_by_date(@date)
+    puts @todos
+    render 'date'
+  end
   def new
     @todo = Todo.new
   end
@@ -72,9 +91,21 @@ class TodosController < ApplicationController
     redirect_to @todos
   end
 
+  def due_date
+    @todo
+  end
+
   private
   def todo_params
     params.require(:todo).permit(:title, :description, :due_date, :completed)
+  end
+
+  def todo_month_params
+    params.permit(:month)
+  end
+
+  def todo_date_params
+    params.permit(:date)
   end
 
 end
